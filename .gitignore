@@ -1,0 +1,3 @@
+log/*
+.ruby-gemset
+.ruby-version
