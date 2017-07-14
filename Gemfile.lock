@@ -27,7 +27,6 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    uuidtools (2.1.5)
 
 PLATFORMS
   ruby
@@ -37,7 +36,6 @@ DEPENDENCIES
   capistrano (~> 3.6)!
   capistrano-bundler (~> 1.1)!
   capistrano3-puma!
-  uuidtools (~> 2.1)!
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
