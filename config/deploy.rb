@@ -29,4 +29,6 @@ namespace :deploy do
       execute "/usr/local/etc/rc.d/puma reload"
     end
   end
+
+  after :finishing, :restart
 end
