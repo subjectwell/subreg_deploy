@@ -21,4 +21,12 @@ namespace :deploy do
   end
 
   after 'deploy:started', :ensure_pids
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      #invoke 'puma:restart'
+      execute "/usr/local/etc/rc.d/puma reload"
+    end
+  end
 end
