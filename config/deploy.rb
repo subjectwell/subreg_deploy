@@ -9,7 +9,7 @@ set :pty, false
 set :keep_releases, 5
 set :bundle_without, 'development test assets'
 
-append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb'
+append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb', 'config/smtp.yml'
 append :linked_dirs, 'log', 'tmp'
 
 namespace :deploy do
