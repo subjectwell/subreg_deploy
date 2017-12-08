@@ -1,15 +1,15 @@
 # config valid only for current version of Capistrano
 lock '3.8.2'
 
-set :application, 'subreg'
-set :repo_url, 'git@github.com:subjectwell/subreg.git'
-set :deploy_to, '/var/deploy/apps/subreg'
+set :application, 'ants'
+set :repo_url, 'git@github.com:subjectwell/ants.git'
+set :deploy_to, '/var/deploy/apps/ants'
 set :scm, :git
 set :pty, false
 set :keep_releases, 5
 set :bundle_without, 'development test assets'
 
-append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb', 'config/smtp.yml'
+append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/cable.yml'
 append :linked_dirs, 'log', 'tmp'
 
 namespace :deploy do
