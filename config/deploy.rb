@@ -4,6 +4,9 @@ lock '3.8.2'
 set :application, 'subreg'
 set :repo_url, 'git@github.com:subjectwell/subreg.git'
 set :deploy_to, '/var/deploy/apps/subreg'
+set :branch do
+  ask( "subreg tag to deploy: " )
+end
 set :scm, :git
 set :pty, false
 set :keep_releases, 5
