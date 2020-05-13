@@ -7,7 +7,6 @@ set :deploy_to, '/var/deploy/apps/subreg'
 set :branch do
   ask( "subreg tag to deploy: " )
 end
-set :scm, :git
 set :pty, false
 set :keep_releases, 5
 set :bundle_without, 'development test assets'
@@ -33,4 +32,5 @@ namespace :deploy do
   end
 
   after :finishing, :restart
+  after :finished, 'airbrake:deploy'
 end
