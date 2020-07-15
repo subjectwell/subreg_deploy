@@ -9,6 +9,8 @@ set :branch do
 end
 set :pty, false
 set :keep_releases, 5
+# Run db migrations if there are any on servers with the role db (cron)
+set :migration_role, :db
 set :bundle_without, 'development test assets'
 
 append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb', 'config/smtp.yml'
