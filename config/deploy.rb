@@ -12,7 +12,7 @@ set :keep_releases, 5
 # Run db migrations if there are any on servers with the role db (cron)
 set :migration_role, :db
 on roles( :app ) do
-  set :bundle_without, 'development test'
+  set :bundle_without, 'development'
 end
 on roles( :cron ) do
   set :bundle_without, 'development test assets'
