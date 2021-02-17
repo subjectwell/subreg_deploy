@@ -18,6 +18,8 @@ on roles( :cron ) do
   set :bundle_without, 'development test assets'
 end
 
+set :assets_roles, [ :app ]
+
 append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb', 'config/smtp.yml'
 append :linked_dirs, 'log', 'tmp'
 
