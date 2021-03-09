@@ -23,6 +23,47 @@ set :assets_roles, [ :app ]
 append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/param_keys.yml', 'config/atana_api.yml', 'config/puma.rb', 'config/smtp.yml'
 append :linked_dirs, 'log', 'tmp'
 
+namespace :frontend do
+  deploy_to_dir = "/var/deploy/apps/subreg/current/public/signup"
+  git = "/usr/local/bin/git"
+  npm = "/usr/local/bin/npm"
+
+  code_dir = File.expand_path("~/subreg")
+
+  desc 'Update frontend app'
+  task :update do
+    %x(cd #{code_dir} && #{git} checkout #{fetch(:branch)} && #{git} pull && #{git} checkout #{fetch(:branch)})
+  end
+
+  desc 'Build Vue Apps'
+  task :build do
+    %x(cd #{code_dir} && rm -rf dist) &&
+        $?.exitstatus == 0 &&
+        %x(cd #{code_dir} && #{npm} ci --only=prod) &&
+        $?.exitstatus == 0 &&
+        %x(cd #{code_dir} && #{npm} prune) &&
+        $?.exitstatus == 0 &&
+        %x(cd #{code_dir}/frontend && #{npm} run build) ||
+        raise( "An error occurred while building the Vue apps" )
+  end
+
+  desc 'Upload App'
+  task :upload do
+    on roles(:all) do
+      Dir.glob( code_dir + "/frontend/dist/*" ).each do | f |
+        upload! f, deploy_to_dir, recursive: true, mkdir: true
+      end
+    end
+  end
+
+  desc 'Deploy the UI app'
+  task :deploy do
+    invoke 'frontend:update'
+    invoke 'frontend:build'
+    invoke 'frontend:upload'
+  end
+end
+
 namespace :deploy do
   desc 'Ensure pids dir is there'
   task :ensure_pids do
