@@ -28,11 +28,12 @@ namespace :frontend do
   git = "/usr/local/bin/git"
   npm = "/usr/local/bin/npm"
 
-  code_dir = File.expand_path("~/subreg")
+  code_dir = File.expand_path("~/subreg/frontend")
+  checkout_dir = File.expand_path("~/subreg")
 
   desc 'Update frontend app'
   task :update do
-    %x(cd #{code_dir} && #{git} checkout #{fetch(:branch)} && #{git} pull && #{git} checkout #{fetch(:branch)})
+    %x(cd #{checkout_dir} && #{git} checkout #{fetch(:branch)} && #{git} pull && #{git} checkout #{fetch(:branch)})
   end
 
   desc 'Build Vue Apps'
@@ -43,7 +44,7 @@ namespace :frontend do
         $?.exitstatus == 0 &&
         %x(cd #{code_dir} && #{npm} prune) &&
         $?.exitstatus == 0 &&
-        %x(cd #{code_dir}/frontend && #{npm} run build) ||
+        %x(cd #{code_dir} && #{npm} run build) ||
         raise( "An error occurred while building the Vue apps" )
   end
 
