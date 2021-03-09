@@ -51,7 +51,7 @@ namespace :frontend do
   desc 'Upload App'
   task :upload do
     on roles(:all) do
-      Dir.glob( code_dir + "/frontend/dist/*" ).each do | f |
+      Dir.glob( code_dir + "/dist/*" ).each do | f |
         upload! f, deploy_to_dir, recursive: true, mkdir: true
       end
     end
