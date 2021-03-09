@@ -81,6 +81,7 @@ namespace :deploy do
     end
   end
 
+  after :finishing, 'frontend:deploy'
   after :finishing, :restart
   after :finished, 'airbrake:deploy'
 end
