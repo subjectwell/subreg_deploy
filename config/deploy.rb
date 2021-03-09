@@ -33,7 +33,7 @@ namespace :frontend do
 
   desc 'Update frontend app'
   task :update do
-    %x(cd #{checkout_dir} && #{git} checkout #{fetch(:branch)} && #{git} pull && #{git} checkout #{fetch(:branch)})
+    %x(cd #{checkout_dir} && #{git} checkout #{fetch(:branch)} && #{git} pull)
   end
 
   desc 'Build Vue Apps'
