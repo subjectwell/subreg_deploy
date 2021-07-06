@@ -9,6 +9,11 @@ set :branch do
 end
 set :pty, false
 set :keep_releases, 5
+
+set :default_env, {
+    'CC' => '/usr/bin/cc',
+    'CPP' => '/usr/bin/c++'
+}
 # Run db migrations if there are any on servers with the role db (cron)
 set :migration_role, :db
 on roles( :app ) do
